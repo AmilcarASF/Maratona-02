@@ -7,11 +7,13 @@ module.exports = {
         return res.render("job")            
     },
 
-    async save(req, res) {        
+    async save(req, res) {                
+
         await Job.create({
             name: req.body.name,
             "daily-hours": req.body["daily-hours"],
             "total-hours": req.body["total-hours"],
+            paid: req.body.paid.checked,
             created_at: Date.now()                
         });        
 
@@ -32,19 +34,19 @@ module.exports = {
 
         job.budget = JobUtils.calculateBudget(job, profile["value-hour"])
 
-        console.log(profile)
-        //console.log(job)
-
         return res.render("job-edit", { job })
     },
 
     async update(req, res) {
         const jobId = req.params.id
 
+        const paid = req.body.paid === "on" ? 1 : 0
+
         const updateJob = {
             name: req.body.name,
             "total-hours": req.body["total-hours"],
             "daily-hours": req.body["daily-hours"],
+            paid: paid
         }
 
         await Job.update(updateJob, jobId)

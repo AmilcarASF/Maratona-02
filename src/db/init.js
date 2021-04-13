@@ -21,7 +21,8 @@ await db.exec(`CREATE TABLE jobs (
     name TEXT,
     daily_hours INT,
     total_hours INT,
-    created_at DATETIME
+    created_at DATETIME,
+    paid INT
 );`);
 
 await db.run(`INSERT INTO profile (
@@ -45,24 +46,28 @@ await db.run(`INSERT INTO jobs (
     name,
     daily_hours,
     total_hours,
-    created_at
+    created_at,
+    paid
     ) VALUES (
     "Pizzaria Guloso",
     2,
     1,
-    1617514376018
+    1617514376018,
+    1
     );`);
 
 await db.run(`INSERT INTO jobs (
     name,
     daily_hours,
     total_hours,
-    created_at
+    created_at,
+    paid
     ) VALUES (
     "OneTwo Projects",
     3,
     47,
-    1617514376018
+    1617514376018,
+    0
     );`);    
 
 await db.close()
